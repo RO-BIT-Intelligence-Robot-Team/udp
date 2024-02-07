@@ -181,8 +181,9 @@ private:
   }
 };
 
-class UDP
+class UDP : public QObject
 {
+  Q_OBJECT
 public:
   UDP(){};
   ~UDP(){};
