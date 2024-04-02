@@ -310,12 +310,12 @@ public slots:
     return;
   }
 
-  void MatImgTrs(Mat img, uint16_t port, QHostAddress& address, QUdpSocket& socket)
+  int MatImgTrs(Mat img, uint16_t port, QHostAddress& address, QUdpSocket& socket)
   {
     if (!img.empty())
     {
       std::vector<uchar> img2Vector;
-      std::vector<int> param = { cv::IMWRITE_JPEG_QUALITY, 80 };
+      std::vector<int> param = { cv::IMWRITE_JPEG_QUALITY, 60 };
 
       imencode(".jpg", img, img2Vector, param);
       Mat jpegImage = imdecode(Mat(img2Vector), cv::IMREAD_COLOR);
@@ -330,10 +330,12 @@ public slots:
       }
 
       std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      return array.size();
     }
+
     else
     {
-      return;
+      return 0;
     }
   }
 
